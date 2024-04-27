@@ -117,21 +117,17 @@ func (i *iteradorLista[T]) Siguiente() {
 }
 
 func (i *iteradorLista[T]) Insertar(dato T) {
-	nuevoNodo := crearNodo(dato)
-	if i.anterior != nil {
-		i.anterior.siguiente = nuevoNodo
-		nuevoNodo.siguiente = i.actual
-		if i.actual == nil {
-			i.lista.ultimo = nuevoNodo
-		}
+	nodo := crearNodo(dato)
+	nodo.siguiente = i.actual
+	if i.anterior == nil {
+		i.lista.primero = nodo
 	} else {
-		nuevoNodo.siguiente = i.actual
-		if i.lista.primero == i.lista.ultimo {
-			i.lista.ultimo = nuevoNodo
-		}
-		i.lista.primero = nuevoNodo
+		i.anterior.siguiente = nodo
 	}
-	i.actual = nuevoNodo
+	if !i.HaySiguiente() {
+		i.lista.ultimo = nodo
+	}
+	i.actual = nodo
 	i.lista.largo++
 }
 
@@ -139,19 +135,18 @@ func (i *iteradorLista[T]) Borrar() T {
 	if !i.HaySiguiente() {
 		panic("El iterador termino de iterar")
 	}
-	dato := i.actual.dato
+	dato := i.VerActual()
+	if i.anterior == nil {
+		i.lista.primero = i.actual.siguiente
+	}
+	if i.actual.siguiente == nil {
+		i.lista.ultimo = i.anterior
+	}
+
 	if i.anterior != nil {
 		i.anterior.siguiente = i.actual.siguiente
-		if i.actual.siguiente == nil {
-			i.lista.ultimo = i.anterior
-			i.actual = i.anterior
-		} else {
-			i.actual = i.anterior.siguiente
-		}
-	} else {
-		i.lista.primero = i.actual.siguiente
-		i.actual = i.lista.primero
 	}
+	i.actual = i.actual.siguiente
 	i.lista.largo--
 	return dato
 }
