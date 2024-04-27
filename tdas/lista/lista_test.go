@@ -383,7 +383,7 @@ func TestBorrarElUltimo(t *testing.T) {
 	}
 }
 
-func TestIteradorBorraAlFinal(t *testing.T) {
+func TestIteradorBorrarAlFinal(t *testing.T) {
 	lista := TDALista.CrearListaEnlazada[int]()
 	valores := []int{0, 1, 2, 3, 4, 5}
 	pos := 0
@@ -428,4 +428,22 @@ func TestIterInsertarYBorrar(t *testing.T) {
 	require.Equal(t, 0, lista.VerPrimero())
 	require.Equal(t, 0, lista.VerUltimo())
 	require.False(t, lista.EstaVacia())
+}
+
+func TestIterBorrarHastaQuedaUltimo(t *testing.T) {
+	lista := TDALista.CrearListaEnlazada[int]()
+	for i := 1; i <= 5; i++ {
+		lista.InsertarUltimo(i)
+	}
+
+	iterador := lista.Iterador()
+	for iterador.HaySiguiente() {
+		if iterador.VerActual() == 5 {
+			break
+		}
+		iterador.Borrar()
+	}
+	require.False(t, lista.EstaVacia())
+	require.Equal(t, 5, lista.VerPrimero())
+	require.Equal(t, 5, lista.VerUltimo())
 }
