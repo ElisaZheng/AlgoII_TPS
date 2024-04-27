@@ -372,6 +372,8 @@ func TestBorrarElUltimo(t *testing.T) {
 		iterador.Siguiente()
 	}
 	require.False(t, iterador.HaySiguiente())
+	require.Equal(t, 5, lista.VerUltimo())
+	require.False(t, lista.EstaVacia())
 
 	iterador = lista.Iterador()
 
@@ -379,7 +381,6 @@ func TestBorrarElUltimo(t *testing.T) {
 		require.Equal(t, valor, iterador.VerActual())
 		iterador.Siguiente()
 	}
-	require.False(t, lista.EstaVacia())
 }
 
 func TestIteradorBorraAlFinal(t *testing.T) {
