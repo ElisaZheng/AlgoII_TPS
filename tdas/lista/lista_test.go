@@ -447,3 +447,5 @@ func TestIterBorrarHastaQuedaUltimo(t *testing.T) {
 	require.Equal(t, 5, lista.VerPrimero())
 	require.Equal(t, 5, lista.VerUltimo())
 }
+
+// es una prueba

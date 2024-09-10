@@ -1,0 +1,11 @@
+go 1.22.1
+
+use (
+	./algoII_ej
+	./tps/tdas
+	./tps/tp0
+	./tps/tp1
+	./tps/tp2
+	./ejer_final
+	./ejer_final/ejer
+)
