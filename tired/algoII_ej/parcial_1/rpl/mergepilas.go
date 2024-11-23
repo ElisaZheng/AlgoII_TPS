@@ -1,0 +1,11 @@
+package rpl
+
+/*
+ Implementar, por división y conquista, 
+ una función que dado un arreglo y su largo, 
+ determine si el mismo se encuentra ordenado. Indicar y justificar el orden.
+*/
+
+func Determinar_largo[T any]([]T) {
+	
+}
